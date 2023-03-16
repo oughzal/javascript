@@ -17,11 +17,11 @@ class Point{
         abc.fillRect(this.X*sizeX,this.Y*sizeY,sizeX,sizeY)
     }
     fillHead(){
-        abc.fillStyle= "#0F0"
+        abc.fillStyle= "#00F"
         abc.fillRect(this.X*sizeX,this.Y*sizeY,sizeX,sizeY)
     }
     clear(){
-        abc.clearRect(this.X*sizeX,this.Y*sizeY,sizeX,sizeY)
+        abc.clearRect(this.X*sizeX -1,this.Y*sizeY -1,sizeX +2 ,sizeY + 2)
     }
 
 
@@ -29,14 +29,14 @@ class Point{
 var snake =[];
 const canvas = document.getElementById('canvas')
 const abc=canvas.getContext('2d');
-var nb=40
+var nb=10
 var food = null
 sizeX = canvas.clientWidth/nb
 sizeY = canvas.clientWidth/nb
 function newGame(){
-    snake.push(new Point(9,9,"#00F"))
-    snake[0].fill() 
+    snake.push(new Point(9,9,"#ddd"))
     newFood()
+    moveSnake()
 }
 
 function newFood(){
@@ -56,7 +56,8 @@ function moveSnake(){
 }
 function drawSnake(){
     for(p of snake){
-        p.fill();
+        p.fill()
+        p.stroke();
     }
     snake[snake.length-1].fillHead()
     food.fill()
@@ -82,7 +83,7 @@ document.body.onkeydown = function(event){
     if(x==nb) x=0
     if(y==nb) y=0
     if(food.X == x && food.Y==y){
-        food.color="#00F"
+        food.color="#ddd"
         snake.push(food)
         newFood()
     }
